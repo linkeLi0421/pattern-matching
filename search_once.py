@@ -35,10 +35,10 @@ def find_unprotected_accesses(file_path):
         for match in matches:
             rw_once_obj_set.add(match[10:-1])
 
-        write_pattern = re.compile(r'WRITE_ONCE\([^\)]*\)')
-        matches = write_pattern.findall(function_body)
-        for match in matches:
-            rw_once_obj_set.add(match[11:match.find(',')])
+        # write_pattern = re.compile(r'WRITE_ONCE\([^\)]*\)')
+        # matches = write_pattern.findall(function_body)
+        # for match in matches:
+        #     rw_once_obj_set.add(match[11:match.find(',')])
 
         # if len(rw_once_obj_set) != 0:
         #     print('llk', rw_once_obj_set)
@@ -66,6 +66,7 @@ def find_unprotected_accesses(file_path):
                     and function_body.rfind('xchg', 0, int(position[0])) < function_body.rfind(')', 0, int(position[0])) \
                     and function_body[int(position[0])-1] != '_' \
                     and function_body[int(position[1])] != '_'\
+                    and function_body[int(position[0])-1] != '&' \
                     and '*' not in function_body[function_body.rfind('\n', 0, int(position[0])):function_body.find('\n', int(position[0]))] \
                     and not (function_body.rfind('\n', 0, int(position[0])) < function_body.rfind('\"', 0, int(position[0])) \
                             and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
@@ -101,7 +102,7 @@ def generate_csv(data):
 
 if __name__ == "__main__":
     # Provide the path to the Linux kernel source file
-    dir_path = '/home/linke/Desktop/linux'
+    dir_path = '/Users/link/linux-all/linux-v6.6'
     for main_dir, dirs, file_name_list in os.walk(dir_path):
         for file in file_name_list:
             if file.endswith('.c'):
