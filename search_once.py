@@ -34,6 +34,19 @@ def get_function_def(content, function_body_start):
     return function_definition
 
 
+def in_lock(function_body, position):
+    pattern = r'\w+_lock.*\('
+    locks = re.finditer(pattern, function_body)
+    for lock in locks:
+        n1 = function_body.count('{', lock.start(), position)
+        n2 = function_body.count('}', lock.start(), position)
+        ul = function_body.count(lock.group(0).replace('lock', 'unlock'), lock.start(), position)
+        if n1 == n2 and ul == 0:
+            return 1
+
+    return 0
+
+
 def find_unprotected_accesses(file_path):
     with open(file_path, 'r') as file:
         content = file.read()
@@ -89,7 +102,8 @@ def find_unprotected_accesses(file_path):
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0])):
                     # print('llk: ', function_body[int(position[0])-5:int(position[1])+5], function_body[int(position[1])])
-                    unprotected_accesses.append(obj)
+                    if not in_lock(function_body, int(position[0])):
+                        unprotected_accesses.append(obj)
         if len(unprotected_accesses) != 0:
             csv_data.append(('https://elixir.bootlin.com/linux/v6.6/source/' + file_path[26:], function_definition,
                              ','.join(unprotected_accesses)))
