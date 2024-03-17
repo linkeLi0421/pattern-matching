@@ -19,15 +19,15 @@ def get_function_body(content, function_body_start):
             if len(brackets) == 0:
                 function_body_end = function_body_start + i
                 break
-    function_body = content[function_body_start:function_body_end + 1], function_body_end + 1
+    function_body = content[function_body_start:function_body_end + 1]
 
-    return function_body
+    return function_body, function_body_end + 1
 
 
 def get_function_def(content, function_body_start):
     index1 = content.rfind('(', 0, function_body_start - 1)
-    index2 = content.rfind('\n', 0, index1)
-    function_definition = content[index2: function_body_start]  # -1 means ignore the first '\n'
+    index2 = content.rfind('\n', 0, index1)  # -1 means ignore the first '\n'
+    function_definition = content[index2: function_body_start]
     function_definition = function_definition.replace('\n', '')
     function_definition = function_definition.replace('\t', '')
     function_definition = re.sub(r'\s{2,}', ' ', function_definition)
@@ -56,9 +56,7 @@ def find_unprotected_accesses(file_path):
     function_body_start = content.find('{', start)
     while function_body_start != -1:
         function_body, function_body_end = get_function_body(content, function_body_start)
-        start = function_body_end
         function_definition = get_function_def(content, function_body_start)
-        function_body_start = content.find('{', start)
 
         rw_once_obj_set = set()
 
@@ -110,6 +108,11 @@ def find_unprotected_accesses(file_path):
                              ','.join(unprotected_accesses)))
             print(file_path, '\n', function_definition, '\n', function_body)
             print('unprotected_accesses: ', unprotected_accesses, '\n')
+
+        # for the next loop
+        start = function_body_end
+        function_body_start = content.find('{', start)
+
 
 
 def generate_csv(data):
