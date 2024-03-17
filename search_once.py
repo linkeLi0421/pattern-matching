@@ -30,6 +30,7 @@ def get_function_def(content, function_body_start):
     function_definition = content[index2: function_body_start]  # -1 means ignore the first '\n'
     function_definition = function_definition.replace('\n', '')
     function_definition = function_definition.replace('\t', '')
+    function_definition = re.sub(r'\s{2,}', ' ', function_definition)
 
     return function_definition
 
