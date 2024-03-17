@@ -60,10 +60,18 @@ def find_unprotected_accesses(file_path):
 
         rw_once_obj_set = set()
 
-        read_pattern = re.compile(r'READ_ONCE\([^\)]*\)')
-        matches = read_pattern.findall(function_body)
+        read_pattern = re.compile(r'READ_ONCE\(')
+        matches = read_pattern.finditer(function_body)
         for match in matches:
-            rw_once_obj_set.add(match[10:-1])
+            brackets = 0
+            for i in range(match.end() - 1, len(function_body)):
+                if function_body[i] == '(':
+                    brackets += 1
+                if function_body[i] == ')':
+                    brackets -= 1
+                if brackets == 0:
+                    rw_once_obj_set.add(function_body[match.end(): i])
+                    break
 
         unprotected_accesses = []
 
