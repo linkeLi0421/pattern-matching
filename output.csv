@@ -1,7 +1,4 @@
 File Path,Function Name,Unprotected Accesses
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/tools/testing/selftests/kvm/dirty_log_perf_test.c,static void vcpu_worker(struct memstress_vcpu_args *vcpu_args),"iteration,iteration,iteration,iteration,iteration"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/tools/testing/selftests/kvm/dirty_log_perf_test.c,"static void run_test(enum vm_guest_mode mode, void *arg)",vcpu_last_completed_iteration[i]
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/socket.c,"static void __sock_release(struct socket *sock, struct inode *inode)",sock->ops
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/socket.c,"struct file *do_accept(struct file *file, unsigned file_flags, struct sockaddr __user *upeer_sockaddr, int __user *upeer_addrlen, int flags)",sock->ops
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/core/dev.c,"bool napi_complete_done(struct napi_struct *n, int work_done)",n->state
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/core/stream.c,"int sk_stream_wait_connect(struct sock *sk, long *timeo_p)",sk->sk_state
@@ -11,36 +8,27 @@ https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/mptcp/sockopt.c,"void mp
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/mptcp/sockopt.c,"void mptcp_sockopt_sync_locked(struct mptcp_sock *msk, struct sock *ssk)",subflow->setsockopt_seq
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/mptcp/protocol.c,"static int mptcp_stream_accept(struct socket *sock, struct socket *newsock, int flags, bool kern)","msk->first,msk->first,msk->first"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/dccp/proto.c,"int dccp_sendmsg(struct sock *sk, struct msghdr *msg, size_t len)",dp->dccps_mss_cache
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/netfilter/nf_conncount.c,"bool nf_conncount_gc_list(struct net *net, struct nf_conncount_list *list)",list->last_gc
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/netfilter/nf_conntrack_extend.c,"void *__nf_ct_ext_find(const struct nf_ct_ext *ext, u8 id)",ext->gen_id
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/netfilter/nf_tables_api.c,"static int nf_tables_dump_obj(struct sk_buff *skb, struct netlink_callback *cb)",nft_net->base_seq
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/netfilter/nf_tables_api.c,"static int nf_tables_commit(struct net *net, struct sk_buff *skb)",nft_net->base_seq
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/rxrpc/call_event.c,"bool rxrpc_input_call_event(struct rxrpc_call *call, struct sk_buff *skb)","call->ack_lost_at,call->keepalive_at,call->delay_ack_at,call->resend_at,call->ping_at,call->expect_rx_by,T,T,T,T,T,T,T,T,T,call->expect_term_by,call->expect_req_by"
+https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/rxrpc/call_event.c,"bool rxrpc_input_call_event(struct rxrpc_call *call, struct sk_buff *skb)","call->keepalive_at,call->ack_lost_at,call->resend_at,call->delay_ack_at,call->ping_at,T,T,T,T,T,T,T,T,T,call->expect_req_by,call->expect_rx_by,call->expect_term_by"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/rxrpc/rxkad.c,"static int rxkad_verify_response(struct rxrpc_connection *conn, struct sk_buff *skb)",conn->channels[i].call_counter
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/ipv4/tcp.c,static int tcp_inq_hint(struct sock *sk),"tp->copied_seq,tp->rcv_nxt"
+https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/ipv4/tcp.c,static int tcp_inq_hint(struct sock *sk),"tp->rcv_nxt,tp->copied_seq"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/unix/garbage.c,void wait_for_unix_gc(void),gc_in_progress
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/tls/tls_sw.c,"static int tls_rx_reader_acquire(struct sock *sk, struct tls_sw_context_rx *ctx, bool nonblock)",ctx->reader_present
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/bluetooth/iso.c,static int iso_sock_release(struct socket *sock),sk->sk_lingertime
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/bluetooth/sco.c,static int sco_sock_release(struct socket *sock),sk->sk_lingertime
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/net/smc/smc_tx.c,"static int smc_tx_wait(struct smc_sock *smc, int flags)","sk->sk_err,sk->sk_shutdown"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/sw/siw/siw_cq.c,"int siw_reap_cqe(struct siw_cq *cq, struct ib_wc *wc)",cqe->flags
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/sw/siw/siw_qp_rx.c,static int siw_orqe_start_rx(struct siw_qp *qp),orqe->flags
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/hw/hfi1/sdma.c,"void sdma_seqfile_dump_sde(struct seq_file *s, struct sdma_engine *sde)",sde->descq_tail
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/hw/hfi1/user_sdma.c,"static int user_sdma_send_pkts(struct user_sdma_request *req, u16 maxpkts)",iovec->offset
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/hw/hfi1/file_ops.c,static int ctxt_reset(struct hfi1_ctxtdata *uctxt),"dd->flags,dd->flags"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/hw/efa/efa_com.c,"static u32 efa_com_reg_read32(struct efa_com_dev *edev, u16 offset)",read_resp->req_id
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/ulp/rtrs/rtrs-clt.c,static int create_cm(struct rtrs_clt_con *con),clt_path->state
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/infiniband/ulp/rtrs/rtrs-clt.c,static int rtrs_send_path_info(struct rtrs_clt_path *clt_path),clt_path->state
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/cpufreq/cpufreq_governor.c,"static void dbs_update_util_handler(struct update_util_data *data, u64 time, unsigned int flags)",policy_dbs->last_sample_time
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/cpufreq/amd-pstate-ut.c,static void amd_pstate_ut_check_perf(u32 index),"cpudata->highest_perf,cpudata->nominal_perf,cpudata->lowest_perf,cpudata->lowest_nonlinear_perf"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/xen/pvcalls-front.c,int pvcalls_front_socket(struct socket *sock),bedata->rsp[req_id].req_id
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/xen/pvcalls-front.c,"int pvcalls_front_connect(struct socket *sock, struct sockaddr *addr,int addr_len, int flags)",bedata->rsp[req_id].req_id
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/xen/pvcalls-front.c,"int pvcalls_front_bind(struct socket *sock, struct sockaddr *addr, int addr_len)",bedata->rsp[req_id].req_id
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/xen/pvcalls-front.c,"int pvcalls_front_listen(struct socket *sock, int backlog)",bedata->rsp[req_id].req_id
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/xen/pvcalls-front.c,"int pvcalls_front_accept(struct socket *sock, struct socket *newsock, int flags)","bedata->rsp[req_id].req_id,bedata->rsp[req_id].req_id,map->passive.inflight_req_id,map->passive.inflight_req_id"
+https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/cpufreq/amd-pstate-ut.c,static void amd_pstate_ut_check_perf(u32 index),"cpudata->nominal_perf,cpudata->highest_perf,cpudata->lowest_nonlinear_perf,cpudata->lowest_perf"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/hwtracing/coresight/coresight-etm-perf.c,"static void etm_event_stop(struct perf_event *event, int mode)","handle->event,handle->event,handle->event"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/crypto/nx/nx-common-powernv.c,"static int wait_for_csb(struct nx842_workmem *wmem,struct coprocessor_status_block *csb)","csb->flags,csb->flags,csb->flags"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/dma-buf/st-dma-fence.c,static int thread_signal_callback(void *arg),"cb.seen,cb.seen,cb.seen"
+https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/dma-buf/st-dma-fence.c,static int thread_signal_callback(void *arg),cb.seen
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/amd/amdgpu/amdgpu_ih.c,"void amdgpu_ih_ring_write(struct amdgpu_device *adev, struct amdgpu_ih_ring *ih, const uint32_t *iv, unsigned int num_dw)",ih->rptr
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/amd/amdkfd/kfd_process.c,int kfd_process_drain_interrupts(struct kfd_process_device *pdd),"pdd->process->irq_drain_is_open,pdd->process->irq_drain_is_open,pdd->process->irq_drain_is_open"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/i915_active.c,"static struct active_node *__active_lookup(struct i915_active *ref, u64 idx)","it->timeline,it->timeline"
@@ -51,15 +39,11 @@ https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/selftes
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/selftests/i915_request.c,static int live_parallel_engines(void *arg),threads[idx].result
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/selftests/i915_request.c,static int perf_parallel_engines(void *arg),engines[idx].result
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/selftest_execlists.c,"static int wait_for_reset(struct intel_engine_cs *engine, struct i915_request *rq, unsigned long timeout)",rq->fence.error
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/selftest_execlists.c,static int live_timeslice_rewind(void *arg),slot[i]
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/selftest_execlists.c,static int live_preempt_user(void *arg),result[0]
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/selftest_engine_pm.c,"static int __measure_timestamps(struct intel_context *ce,u64 *dt, u64 *d_ring, u64 *d_ctx)",sema[1]
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/selftest_lrc.c,"static int __lrc_timestamp(const struct lrc_timestamp *arg, bool preempt)",arg->ce[0]->lrc_reg_state[CTX_TIMESTAMP]
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/intel_execlists_submission.c,__execlists_schedule_in(struct i915_request *rq),engine->context_tag
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/intel_execlists_submission.c,static void execlists_submission_tasklet(struct tasklet_struct *t),"engine->execlists.error_interrupt,engine->execlists.error_interrupt,engine->execlists.error_interrupt,engine->execlists.error_interrupt,engine->execlists.error_interrupt"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/uc/intel_guc_ct.c,"static int ct_write(struct intel_guc_ct *ct, const u32 *action, u32 len /* in dwords */, u32 fence, u32 flags)","desc->head,desc->head,desc->tail,desc->tail"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gt/uc/intel_guc_ct.c,"static int ct_read(struct intel_guc_ct *ct, struct ct_incoming_msg **msg)","desc->head,desc->head,desc->tail"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/i915/gem/i915_gem_mman.c,static struct file *mmap_singleton(struct drm_i915_private *i915),i915->gem.mmap_singleton
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/gpu/drm/vmwgfx/vmwgfx_drv.c,"static int vmwgfx_pm_notifier(struct notifier_block *nb, unsigned long val, void *ptr)","dev_priv->suspend_locked,dev_priv->suspend_locked"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/nvme/host/ioctl.c,"static int nvme_uring_cmd_io(struct nvme_ctrl *ctrl, struct nvme_ns *ns,struct io_uring_cmd *ioucmd, unsigned int issue_flags, bool vec)",cmd->flags
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/nvme/target/core.c,static void nvmet_update_sq_head(struct nvmet_req *req),req->sq->sqhd
@@ -69,9 +53,7 @@ https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/intel/f
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/intel/fm10k/fm10k_pci.c,static void fm10k_detach_subtask(struct fm10k_intfc *interface),interface->uc_addr
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/intel/i40e/i40e_ethtool.c,"static int i40e_set_fec_cfg(struct net_device *netdev, u8 fec_cfg)",pf->flags
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/intel/i40e/i40e_ethtool.c,"static int i40e_set_priv_flags(struct net_device *dev, u32 flags)",pf->flags
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/intel/iavf/iavf_ethtool.c,"static int iavf_set_priv_flags(struct net_device *netdev, u32 flags)",adapter->flags
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/intel/ixgbe/ixgbe_main.c,void ixgbe_update_stats(struct ixgbe_adapter *adapter),"adapter->rx_ring[i],adapter->rx_ring[i]"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/amazon/ena/ena_com.c,"static u32 ena_com_reg_bar_read32(struct ena_com_dev *ena_dev, u16 offset)",read_resp->req_id
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/qlogic/qed/qed_iwarp.c,"int qed_iwarp_destroy_qp(struct qed_hwfn *p_hwfn, struct qed_rdma_qp *qp)","ep->state,ep->state"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/google/gve/gve_ethtool.c,"static int gve_set_priv_flags(struct net_device *netdev, u32 flags)",priv->ethtool_flags
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/mediatek/mtk_ppe.c,"mtk_flow_entry_update_l2(struct mtk_ppe *ppe, struct mtk_flow_entry *entry)",hwe->ib1
@@ -80,26 +62,21 @@ https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/cavium/
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/cavium/liquidio/cn23xx_pf_device.c,static int cn23xx_reset_io_queues(struct octeon_device *oct),reg_val
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/ethernet/aquantia/atlantic/aq_main.c,"static netdev_features_t aq_ndev_fix_features(struct net_device *ndev, netdev_features_t features)",aq_nic->xdp_prog
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c,"void iwl_mvm_sync_rx_queues_internal(struct iwl_mvm *mvm, enum iwl_mvm_rxq_notif_type type, bool sync, const void *data, u32 size)","mvm->queue_sync_state,mvm->queue_sync_state,mvm->queue_sync_state"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/wireless/intel/iwlwifi/pcie/trans.c,"static int iwl_trans_pcie_wait_txq_empty(struct iwl_trans *trans, int txq_idx)",txq->write_ptr
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/wireless/broadcom/brcm80211/brcmfmac/sdio.c,static void brcmf_sdio_dataworker(struct work_struct *work),bus->dpc_triggered
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/net/wireless/ath/wcn36xx/dxe.c,"static int wcn36xx_rx_handle_packets(struct wcn36xx *wcn, struct wcn36xx_dxe_ch *ch, u32 ctrl, u32 en_mask, u32 int_mask, u32 status_reg)",dxe->ctrl
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/char/xillybus/xillyusb.c,"static ssize_t xillyusb_read(struct file *filp, char __user *userbuf, size_t count, loff_t *f_pos)","fifo->fill,fifo->fill,chan->read_data_ok,chan->read_data_ok,chan->read_data_ok"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/virtio/virtio_ring.c,"static void *virtqueue_get_buf_ctx_packed(struct virtqueue *_vq, unsigned int *len, void **ctx)",vq->last_used_idx
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/hv/channel_mgmt.c,static void vmbus_wait_for_unload(void),msg->header.message_type
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/scsi/fcoe/fcoe.c,static void fcoe_recv_frame(struct sk_buff *skb),stats->ErrorFrames
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/scsi/qla2xxx/qla_edif.c,"void qla_edif_sess_down(struct scsi_qla_host *vha, struct fc_port *sess)","sess->edif.sess_down_acked,sess->edif.sess_down_acked"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/platform/surface/aggregator/ssh_packet_layer.c,void ssh_ptl_cancel(struct ssh_packet *p),p->ptl
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/i2c/busses/i2c-rk3x.c,static int rk3x_i2c_wait_xfer_poll(struct rk3x_i2c *i2c),i2c->busy
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/s390/net/qeth_l2_main.c,static void qeth_addr_change_event_worker(struct work_struct *work),card->info.pnso_mode
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/usb/gadget/udc/gr_udc.c,static int gr_handle_out_ep(struct gr_ep *ep),req->curr_desc->ctrl
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/accel/ivpu/ivpu_job.c,"static int ivpu_cmdq_push_job(struct ivpu_cmdq *cmdq, struct ivpu_job *job)",header->tail
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/bluetooth/hci_bcm4377.c,"static void bcm4377_poll_completion_ring(struct bcm4377_data *bcm4377, struct bcm4377_completion_ring *ring)",heads[ring->ring_id]
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/dma/xilinx/xilinx_dpdma.c,"static ssize_t xilinx_dpdma_debugfs_read(struct file *f, char __user *buf, size_t size, loff_t *pos)",dpdma_debugfs.testcase
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/edac/altera_edac.c,"static ssize_t altr_sdr_mc_err_inject_write(struct file *file, const char __user *data, size_t count, loff_t *ppos)","ptemp[1],ptemp[0]"
+https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/edac/altera_edac.c,"static ssize_t altr_sdr_mc_err_inject_write(struct file *file, const char __user *data, size_t count, loff_t *ppos)","ptemp[0],ptemp[1]"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/drivers/edac/altera_edac.c,"altr_edac_device_trig(struct file *file, const char __user *user_buf, size_t count, loff_t *ppos)",ptemp[i]
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/security/keys/process_keys.c,static struct key *get_user_register(struct user_namespace *user_ns),user_ns->user_keyring_register
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/security/keys/keyring.c,"static bool search_nested_keyrings(struct key *keyring, struct keyring_search_context *ctx)","node->back_pointer,node->back_pointer"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/virt/kvm/coalesced_mmio.c,"static int coalesced_mmio_write(struct kvm_vcpu *vcpu,struct kvm_io_device *this, gpa_t addr,int len, const void *val)",ring->last
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/xtensa/kernel/smp.c,void __cpu_die(unsigned int cpu),cpu_start_id
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/powerpc/kvm/book3s_hv_rm_xics.c,"int xics_rm_h_cppr(struct kvm_vcpu *vcpu, unsigned long cppr)","icp->state,icp->state"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/powerpc/kvm/book3s_xics.c,"static noinline void kvmppc_h_cppr(struct kvm_vcpu *vcpu, unsigned long cppr)","icp->state,icp->state"
@@ -108,20 +85,14 @@ https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/powerpc/kernel/irq_64.c
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/s390/kvm/vsie.c,"static int shadow_scb(struct kvm_vcpu *vcpu, struct vsie_page *vsie_page)","scb_o->ecb,scb_o->ecb,scb_o->ecb,scb_o->ecb,scb_o->ecb,scb_o->ecb"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/s390/lib/test_unwind.c,static void unwindme_timer_fn(struct timer_list *unused),unwindme
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/s390/lib/spinlock.c,static inline void arch_spin_lock_queued(arch_spinlock_t *lp),"node->next,node->prev,node->prev"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/s390/kernel/time.c,static int stp_sync_clock(void *data),"sync->in_sync,sync->in_sync"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/s390/kernel/vtime.c,static int do_account_vtime(struct task_struct *tsk),"S390_lowcore.system_timer,S390_lowcore.hardirq_timer"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/x86/platform/efi/quirks.c,void efi_crash_gracefully_on_page_fault(unsigned long phys_addr),efi_rts_work.efi_rts_id
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/x86/kvm/cpuid.c,"static struct kvm_cpuid_entry2 *do_host_cpuid(struct kvm_cpuid_array *array, u32 function, u32 index)",max_cpuid_80000000
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/x86/events/intel/pt.c,"static long pt_event_snapshot_aux(struct perf_event *event, struct perf_output_handle *handle, unsigned long size)",pt->handle_nmi
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/x86/kernel/smpboot.c,static inline void mwait_play_dead(void),md->control
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/x86/kernel/apic/apic.c,static int __init calibrate_APIC_clock(void),"jiffies,jiffies"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/riscv/kvm/mmu.c,void kvm_riscv_gstage_free_pgd(struct kvm *kvm),kvm->arch.pgd
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/arch/arm64/kvm/hyp/nvhe/pkvm.c,"static int init_pkvm_hyp_vcpu(struct pkvm_hyp_vcpu *hyp_vcpu, struct pkvm_hyp_vm *hyp_vm, struct kvm_vcpu *host_vcpu, unsigned int vcpu_idx)",host_vcpu->vcpu_id
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/lib/sbitmap.c,"unsigned long __sbitmap_queue_get_batch(struct sbitmap_queue *sbq, int nr_tags,unsigned int *offset)",map->word
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/lib/stackdepot.c,"unsigned int stack_depot_fetch(depot_stack_handle_t handle, unsigned long **entries)","pool_index,pool_index,pool_index"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/mm/ksm.c,"static ssize_t max_page_sharing_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count)",ksm_max_page_sharing
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/mm/z3fold.c,"static inline struct z3fold_header *__z3fold_alloc(struct z3fold_pool *pool,size_t size, bool can_sleep)","l,l,l"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/mm/slub.c,"static __always_inline void do_slab_free(struct kmem_cache *s,struct slab *slab, void *head, void *tail,int cnt, unsigned long addr)","c->tid,c->tid,c->freelist,c->freelist"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/mm/slub.c,"static ssize_t slabs_cpu_partial_show(struct kmem_cache *s, char *buf)",slab->slabs
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/mm/page_ext.c,static void __free_page_ext(unsigned long pfn),ms->page_ext
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/mm/kasan/shadow.c,"int kasan_populate_vmalloc(unsigned long addr, unsigned long size)","p,p,p,p"
@@ -129,41 +100,27 @@ https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/io_uring/timeout.c,"int io_t
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/io_uring/msg_ring.c,"static int io_msg_exec_remote(struct io_kiocb *req, task_work_func_t func)",ctx->submitter_task
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/io_uring/net.c,"int io_sendmsg_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)","sqe->addr2,sqe->addr"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/io_uring/net.c,"int io_recvmsg_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)",sqe->addr
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/io_uring/net.c,"int io_send_zc_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)","sqe->addr,sqe->addr2"
+https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/io_uring/net.c,"int io_send_zc_prep(struct io_kiocb *req, const struct io_uring_sqe *sqe)","sqe->addr2,sqe->addr"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/eventpoll.c,"static bool ep_busy_loop(struct eventpoll *ep, int nonblock)",ep->napi_id
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/eventpoll.c,"static int attach_epitem(struct file *file, struct epitem *epi)","file->f_ep,file->f_ep"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/dcache.c,static inline void __d_clear_type_and_inode(struct dentry *dentry),dentry->d_flags
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/btrfs/delayed-inode.c,static struct btrfs_delayed_node *btrfs_get_delayed_node(struct btrfs_inode *btrfs_inode),"btrfs_inode->delayed_node,btrfs_inode->delayed_node,btrfs_inode->delayed_node"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/btrfs/delayed-inode.c,void btrfs_remove_delayed_node(struct btrfs_inode *inode),inode->delayed_node
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/erofs/zdata.c,"static struct page *pickup_page_for_submission(struct z_erofs_pcluster *pcl, unsigned int nr, struct page **pagepool, struct address_space *mc)","page->mapping,page->mapping"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/nfs/flexfilelayout/flexfilelayoutdev.c,"nfs4_ff_layout_prepare_ds(struct pnfs_layout_segment *lseg, struct nfs4_ff_layout_mirror *mirror, bool fail_return)",ds->ds_clp
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/ext4/inode.c,"static void ext4_update_bh_state(struct buffer_head *bh, unsigned long flags)","bh->b_state,bh->b_state"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/ext4/inode.c,"static int mpage_map_and_submit_extent(handle_t *handle, struct mpage_da_data *mpd, bool *give_up_on_write)","EXT4_I(inode)->i_disksize,EXT4_I(inode)->i_disksize"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/fs/iomap/direct-io.c,"__iomap_dio_rw(struct kiocb *iocb, struct iov_iter *iter,const struct iomap_ops *ops, const struct iomap_dio_ops *dops,unsigned int dio_flags, void *private, size_t done_before)",dio->submit.waiter
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/sound/core/ump.c,"static int ump_req_msg(struct snd_ump_endpoint *ump, u32 req1, u32 req2, u32 reply)","ump->stream_finished,ump->stream_finished,ump->stream_finished"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/sound/core/pcm_lib.c,"void snd_pcm_playback_silence(struct snd_pcm_substream *substream, snd_pcm_uframes_t new_hw_ptr)",runtime->control->appl_ptr
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/exit.c,void __noreturn make_task_dead(int signr),oops_limit
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/panic.c,void check_panic_on_warn(const char *origin),warn_limit
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/workqueue.c,void __flush_workqueue(struct workqueue_struct *wq),"wq->first_flusher,wq->first_flusher"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/kcsan/kcsan_test.c,static noinline void test_kernel_change_bits(void),test_var
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/kcsan/kcsan_test.c,static void test_write_write_assume_atomic(struct kunit *test),test_var
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/trace.c,"tracing_buffers_splice_read(struct file *file, loff_t *ppos, struct pipe_inode_info *pipe, size_t len, unsigned int flags)",iter->wait_index
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/trace_clock.c,u64 notrace trace_clock_global(void),trace_clock_struct.prev_time
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/tracing_map.c,"__tracing_map_insert(struct tracing_map *map, void *key, bool lookup_only)","entry->val,entry->val"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/trace_stack.c,"static void check_stack(unsigned long ip, unsigned long *stack)","tracer_frame,tracer_frame"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/ring_buffer.c,"int ring_buffer_wait(struct trace_buffer *buffer, int cpu, int full)",work->wait_index
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/ring_buffer.c,rb_set_commit_to_write(struct ring_buffer_per_cpu *cpu_buffer),cpu_buffer->tail_page
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/ring_buffer.c,"rb_reserve_next_event(struct trace_buffer *buffer, struct ring_buffer_per_cpu *cpu_buffer, unsigned long length)",cpu_buffer->buffer
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/trace/ring_buffer_benchmark.c,static void ring_buffer_consumer(void),"reader_finish,reader_finish"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/sched/core.c,static bool set_nr_if_polling(struct task_struct *p),ti->flags
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/sched/fair.c,static void task_numa_work(struct callback_head *work),vma->numab_state->access_pids[1]
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/sched/idle.c,"void play_idle_precise(u64 duration_ns, u64 latency_ns)",it.done
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/sched/loadavg.c,void calc_load_nohz_stop(void),"calc_load_update,calc_load_update,calc_load_update,calc_load_update"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/time/tick-sched.c,"static void tick_sched_do_timer(struct tick_sched *ts, ktime_t now)",jiffies
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/rcu/rcutorture.c,rcu_torture_pipe_update_one(struct rcu_torture *rp),rp->rtort_pipe_count
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/rcu/rcutorture.c,static int rcu_torture_boost(void *arg),boost_starttime
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/rcu/sync.c,void rcu_sync_exit(struct rcu_sync *rsp),"rsp->gp_state,rsp->gp_state"
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/rcu/tree.c,static void rcu_barrier_entrain(struct rcu_data *rdp),rcu_state.barrier_sequence
-https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/kernel/bpf/percpu_freelist.c,___pcpu_freelist_pop_nmi(struct pcpu_freelist *s),"head->first,s->extralist.first"
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/block/bio.c,static inline void bio_put_percpu_cache(struct bio *bio),cache->nr_irq
 https://elixir.bootlin.com/linux/v6.6/source/x-v6.6/block/fops.c,"static ssize_t __blkdev_direct_IO(struct kiocb *iocb, struct iov_iter *iter,unsigned int nr_pages)",dio->waiter

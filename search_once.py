@@ -36,7 +36,7 @@ def get_function_def(content, function_body_start):
 
 
 def in_lock(function_body, position):
-    pattern = r'\w+_lock.*\('
+    pattern = r'\w+lock.*\('
     locks = re.finditer(pattern, function_body)
     for lock in locks:
         n1 = function_body.count('{', lock.start(), position)
