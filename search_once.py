@@ -47,6 +47,24 @@ def in_lock(function_body, position):
 
     return 0
 
+def is_vardef(function_body, position):
+    vardef_pattern = r'\b(?:int|char|float|double|long|short)\s+(\w+)\s*(?:\[\s*\d*\s*\])?\s*;'
+    matches = re.finditer(vardef_pattern, function_body)
+    for match in matches:
+        start_pos = match.start(1)
+        end_pos = match.end(1)
+        if start_pos <= position <= end_pos:
+            return True
+
+    struct_pattern = r'struct\s+(\w+)\s+(\w+)\s*;'
+    matches = re.finditer(struct_pattern, function_body)
+    for match in matches:
+        start_pos = match.start()
+        end_pos = match.end()
+        if start_pos <= position <= end_pos:
+            return True
+
+    return False
 
 def find_unprotected_accesses(file_path):
     with open(file_path, 'r') as file:
@@ -107,7 +125,8 @@ def find_unprotected_accesses(file_path):
                         and not (
                         function_body.rfind('\n', 0, int(position[0])) < function_body.rfind('\"', 0, int(position[0])) \
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
-                        and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0])):
+                        and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))\
+                        and not is_vardef(function_body, int(position[0])):
                     # print('llk: ', function_body[int(position[0])-5:int(position[1])+5], function_body[int(position[1])])
                     if not in_lock(function_body, int(position[0])):
                         unprotected_accesses.append(obj)
