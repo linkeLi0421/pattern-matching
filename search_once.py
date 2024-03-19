@@ -66,6 +66,11 @@ def is_vardef(function_body, position):
 
     return False
 
+def is_plain_write(function_body, position):
+    if function_body[int(position[1]) + 1] == '=':
+        return True
+    return False
+
 def find_unprotected_accesses(file_path):
     with open(file_path, 'r') as file:
         content = file.read()
@@ -126,7 +131,8 @@ def find_unprotected_accesses(file_path):
                         function_body.rfind('\n', 0, int(position[0])) < function_body.rfind('\"', 0, int(position[0])) \
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))\
-                        and not is_vardef(function_body, int(position[0])):
+                        and not is_vardef(function_body, int(position[0]))\
+                        and not is_plain_write(function_body, position):
                     # print('llk: ', function_body[int(position[0])-5:int(position[1])+5], function_body[int(position[1])])
                     if not in_lock(function_body, int(position[0])):
                         unprotected_accesses.append(obj)
