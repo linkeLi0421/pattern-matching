@@ -39,6 +39,8 @@ def in_lock(function_body, position):
     pattern = r'\w+lock.*\('
     locks = re.finditer(pattern, function_body)
     for lock in locks:
+        if 'unlock' in lock.group():
+            continue
         n1 = function_body.count('{', lock.start(), position)
         n2 = function_body.count('}', lock.start(), position)
         ul = function_body.count(lock.group(0).replace('lock', 'unlock'), lock.start(), position)
