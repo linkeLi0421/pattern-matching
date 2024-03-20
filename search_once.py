@@ -42,7 +42,7 @@ def in_lock(function_body, position):
         n1 = function_body.count('{', lock.start(), position)
         n2 = function_body.count('}', lock.start(), position)
         ul = function_body.count(lock.group(0).replace('lock', 'unlock'), lock.start(), position)
-        if n1 == n2 and ul == 0:
+        if n1 == n2 and n1 != 0 and ul == 0:
             return 1
 
     return 0
