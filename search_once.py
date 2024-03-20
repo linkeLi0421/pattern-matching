@@ -69,7 +69,7 @@ def is_vardef(function_body, position):
     return False
 
 def is_plain_write(function_body, position):
-    if function_body[int(position[1]) + 1] == '=':
+    if function_body[int(position[1]) + 1] == '=' and function_body[int(position[1]) + 2] == ' ':
         return True
     return False
 
