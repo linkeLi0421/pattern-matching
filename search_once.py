@@ -113,22 +113,15 @@ def find_unprotected_accesses(file_path):
             #  function_body[int(position[0])-5:int(position[0])] != "ONCE(" \
 
             for position in positions:
-                if function_body.rfind('WRITE_ONCE(', 0, int(position[0])) < function_body.rfind(')', 0,
-                                                                                                 int(position[0])) \
-                        and function_body.rfind('READ_ONCE(', 0, int(position[0])) < function_body.rfind(')', 0, int(
-                    position[0])) \
-                        and function_body.rfind('WARN_ON_ONCE', 0, int(position[0])) < function_body.rfind(')', 0, int(
-                    position[0])) \
-                        and function_body.rfind('xchg', 0, int(position[0])) < function_body.rfind(')', 0,
-                                                                                                   int(position[0])) \
+                if function_body.rfind('WRITE_ONCE(', 0, position[0]) <= function_body.rfind(')', 0, int(position[0])) \
+                        and function_body.rfind('READ_ONCE(', 0, int(position[0])) <= function_body.rfind(')', 0, int(position[0])) \
+                        and function_body.rfind('WARN_ON_ONCE', 0, int(position[0])) <= function_body.rfind(')', 0, int(position[0])) \
+                        and function_body.rfind('xchg', 0, int(position[0])) <= function_body.rfind(')', 0,int(position[0])) \
                         and function_body[int(position[0]) - 1] != '_' \
                         and function_body[int(position[1])] != '_' \
                         and function_body[int(position[0]) - 1] != '&' \
-                        and '*' not in function_body[
-                                       function_body.rfind('\n', 0, int(position[0])):function_body.find('\n', int(
-                                           position[0]))] \
-                        and not (
-                        function_body.rfind('\n', 0, int(position[0])) < function_body.rfind('\"', 0, int(position[0])) \
+                        and '*' not in function_body[function_body.rfind('\n', 0, int(position[0])):function_body.find('\n', int(position[0]))] \
+                        and not (function_body.rfind('\n', 0, int(position[0])) < function_body.rfind('\"', 0, int(position[0])) \
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))\
                         and not is_vardef(function_body, int(position[0]))\
