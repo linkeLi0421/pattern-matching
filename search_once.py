@@ -37,6 +37,7 @@ def get_function_def(content, function_body_start):
 
 def in_lock(function_body, position):
     pattern = r'\w+lock.*\('
+    # enable_sync_clock() will be matched as a lock wrongly
     locks = re.finditer(pattern, function_body)
     for lock in locks:
         if 'unlock' in lock.group():
@@ -44,7 +45,8 @@ def in_lock(function_body, position):
         n1 = function_body.count('{', lock.start(), position)
         n2 = function_body.count('}', lock.start(), position)
         ul = function_body.count(lock.group(0).replace('lock', 'unlock'), lock.start(), position)
-        if n1 == n2 and n1 != 0 and ul == 0:
+        ul += function_body.count(lock.group(0).replace('lock', 'release'), lock.start(), position)
+        if n1 == n2 and lock.start() < position and ul == 0:
             return 1
 
     return 0
@@ -124,7 +126,7 @@ def find_unprotected_accesses(file_path):
                         and function_body[int(position[0]) - 1] != '&' \
                         and '*' not in function_body[function_body.rfind('\n', 0, int(position[0])):function_body.find('\n', int(position[0]))] \
                         and not (function_body.rfind('\n', 0, int(position[0])) < function_body.rfind('\"', 0, int(position[0])) \
-                        and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
+                            and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
                         and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))\
                         and not is_vardef(function_body, int(position[0]))\
                         and not is_plain_write(function_body, position):
