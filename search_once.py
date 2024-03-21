@@ -42,14 +42,15 @@ def in_lock(function_body, position):
     for lock in locks:
         if 'unlock' in lock.group():
             continue
-        n1 = function_body.count('{', lock.start(), position)
-        n2 = function_body.count('}', lock.start(), position)
-        ul = function_body.count(lock.group(0).replace('lock', 'unlock'), lock.start(), position)
-        ul += function_body.count(lock.group(0).replace('lock', 'release'), lock.start(), position)
-        if n1 == n2 and lock.start() < position and ul == 0:
+        n1 = function_body.count('{', lock.start(), position[0])
+        n2 = function_body.count('}', lock.start(), position[0])
+        ul = function_body.count(lock.group(0).replace('lock', 'unlock'), lock.start(), position[0])
+        ul += function_body.count(lock.group(0).replace('lock', 'release'), lock.start(), position[0])
+        if n1 == n2 and lock.start() < position[0] and ul == 0:
             return 1
 
     return 0
+
 
 def is_vardef(function_body, position):
     vardef_pattern = r'\b(?:int|char|float|double|long|short)\s+(\w+)\s*(?:\[\s*\d*\s*\])?\s*;'
@@ -57,7 +58,7 @@ def is_vardef(function_body, position):
     for match in matches:
         start_pos = match.start(1)
         end_pos = match.end(1)
-        if start_pos <= position <= end_pos:
+        if start_pos <= position[0] <= end_pos:
             return True
 
     struct_pattern = r'struct\s+(\w+)\s+(\w+)\s*;'
@@ -65,15 +66,41 @@ def is_vardef(function_body, position):
     for match in matches:
         start_pos = match.start()
         end_pos = match.end()
-        if start_pos <= position <= end_pos:
+        if start_pos <= position[0] <= end_pos:
             return True
 
     return False
 
+
 def is_plain_write(function_body, position):
-    if function_body[int(position[1]) + 1] == '=' and function_body[int(position[1]) + 2] == ' ':
+    if function_body[position[1] + 1] == '=' and function_body[position[1] + 2] == ' ':
         return True
     return False
+
+
+def not_in_func_ignore(function_body, position):
+    ignore_funcs = ['WRITE_ONCE', 'READ_ONCE', 'WARN_ON_ONCE', 'xchg']
+    for ignore_func in ignore_funcs:
+        if function_body.rfind(ignore_func, 0, position[0]) <= function_body.rfind(')', 0, position[0]):
+            pass
+        else:
+            return False
+    return True
+
+
+def is_indentifier(function_body, position):
+    return function_body[position[1]] != '_' and function_body[position[0] - 1] != '_' and function_body[position[0] - 1] != '&'
+
+
+def is_in_comment(function_body, position):
+    return '*' not in function_body[function_body.rfind('\n', 0, position[0]):function_body.find('\n', position[0])]
+
+
+def is_in_string(function_body, position):
+    return not (function_body.rfind('\n', 0, position[0]) < function_body.rfind('\"', 0, position[0]) \
+            and function_body.find('\n', position[0]) > function_body.rfind('\"', 0, position[0])) \
+            and function_body.find('\n', position[0]) > function_body.rfind('\"', 0, position[0])
+
 
 def find_unprotected_accesses(file_path):
     with open(file_path, 'r') as file:
@@ -112,26 +139,16 @@ def find_unprotected_accesses(file_path):
 
         for obj in rw_once_obj_set:
             # Find all positions of "item" in the text
-            # print(file_path, obj)
             positions = find_all_positions(re.escape(obj), function_body)
-            #  function_body[int(position[0])-5:int(position[0])] != "ONCE(" \
 
             for position in positions:
-                if function_body.rfind('WRITE_ONCE(', 0, position[0]) <= function_body.rfind(')', 0, int(position[0])) \
-                        and function_body.rfind('READ_ONCE(', 0, int(position[0])) <= function_body.rfind(')', 0, int(position[0])) \
-                        and function_body.rfind('WARN_ON_ONCE', 0, int(position[0])) <= function_body.rfind(')', 0, int(position[0])) \
-                        and function_body.rfind('xchg', 0, int(position[0])) <= function_body.rfind(')', 0,int(position[0])) \
-                        and function_body[int(position[0]) - 1] != '_' \
-                        and function_body[int(position[1])] != '_' \
-                        and function_body[int(position[0]) - 1] != '&' \
-                        and '*' not in function_body[function_body.rfind('\n', 0, int(position[0])):function_body.find('\n', int(position[0]))] \
-                        and not (function_body.rfind('\n', 0, int(position[0])) < function_body.rfind('\"', 0, int(position[0])) \
-                            and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))) \
-                        and function_body.find('\n', int(position[0])) > function_body.rfind('\"', 0, int(position[0]))\
-                        and not is_vardef(function_body, int(position[0]))\
-                        and not is_plain_write(function_body, position):
-                    # print('llk: ', function_body[int(position[0])-5:int(position[1])+5], function_body[int(position[1])])
-                    if not in_lock(function_body, int(position[0])):
+                if not_in_func_ignore(function_body, position) \
+                    and is_indentifier(function_body, position)\
+                    and is_in_comment(function_body, position) \
+                    and is_in_string(function_body, position)\
+                    and not is_vardef(function_body, position)\
+                    and not is_plain_write(function_body, position):
+                    if not in_lock(function_body, position):
                         unprotected_accesses.append(obj)
         if len(unprotected_accesses) != 0:
             csv_data.append(('https://elixir.bootlin.com/linux/v6.6/source/' + file_path[26:], function_definition,
