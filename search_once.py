@@ -79,7 +79,8 @@ def is_plain_write(function_body, position):
 
 
 def not_in_func_ignore(function_body, position):
-    ignore_funcs = ['WRITE_ONCE', 'READ_ONCE', 'WARN_ON_ONCE', 'xchg']
+    ignore_funcs = ['WRITE_ONCE', 'READ_ONCE', 'WARN_ON_ONCE', 'xchg', 'smp_store_mb', 'smp_store_release',
+                    'smp_load_acquire', 'atomic_inc', 'atomic_inc_and_test', 'set_bit', 'test_and_set_bit']
     for ignore_func in ignore_funcs:
         if function_body.rfind(ignore_func, 0, position[0]) <= function_body.rfind(')', 0, position[0]):
             pass
